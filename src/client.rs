@@ -22,8 +22,6 @@ pub struct HttpsConnector<T> {
 impl HttpsConnector<HttpConnector> {
     /// Construct a new HttpsConnector.
     ///
-    /// Takes number of DNS worker threads.
-    ///
     /// This uses hyper's default `HttpConnector`, and default `TlsConnector`.
     /// If you wish to use something besides the defaults, use `From::from`.
     ///
@@ -34,12 +32,12 @@ impl HttpsConnector<HttpConnector> {
     ///
     /// If you would like to force the use of HTTPS then call https_only(true)
     /// on the returned connector.
-    pub fn new(threads: usize) -> Result<Self, Error> {
-        native_tls::TlsConnector::new().map(|tls| HttpsConnector::new_(threads, tls.into()))
+    pub fn new() -> Result<Self, Error> {
+        native_tls::TlsConnector::new().map(|tls| HttpsConnector::new_(tls.into()))
     }
 
-    fn new_(threads: usize, tls: TlsConnector) -> Self {
-        let mut http = HttpConnector::new(threads);
+    fn new_(tls: TlsConnector) -> Self {
+        let mut http = HttpConnector::new();
         http.enforce_http(false);
         HttpsConnector::from((http, tls))
     }

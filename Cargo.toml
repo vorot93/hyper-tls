@@ -16,8 +16,12 @@ vendored = ["native-tls/vendored"]
 [dependencies]
 native-tls = "0.2"
 hyper = { git = "https://github.com/hyperium/hyper" }
-tokio-io = "0.2.0-alpha.1"
-tokio-tls = "0.3.0-alpha.1"
+tokio-io = "0.2.0-alpha.4"
+tokio-tls = { git = "https://github.com/tokio-rs/tokio", rev = "15dc0563b73d9da3eabdbac89e55b9cfcef691e4" }
 
 [dev-dependencies]
-tokio = "0.2.0-alpha.1"
+tokio = "0.2.0-alpha.4"
+
+[patch.crates-io]
+tokio-io = { git = "https://github.com/tokio-rs/tokio", rev = "15dc0563b73d9da3eabdbac89e55b9cfcef691e4" }
+tokio-tls = { git = "https://github.com/tokio-rs/tokio", rev = "15dc0563b73d9da3eabdbac89e55b9cfcef691e4" }
